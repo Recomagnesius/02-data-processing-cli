@@ -6,6 +6,7 @@ import { hash } from './commands/hash.js';
 import { hashCompare } from './commands/hashCompare.js';
 import { encrypt } from './commands/encrypt.js';
 import { decrypt } from './commands/decrypt.js';
+import { logStats } from './commands/logStats.js';
 
 export async function repl(currentDir, rl){
     console.log(`You are currently in ${currentDir}\n`);
@@ -37,24 +38,30 @@ export async function repl(currentDir, rl){
                 break;
 
             case 'hash':
-            await hash(currentDir, args, options);
-            console.log(`You are currently in ${currentDir}`);
-            break;
+                await hash(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
 
             case 'hash-compare':
-            await hashCompare(currentDir, args, options);
-            console.log(`You are currently in ${currentDir}`);
-            break;
+                await hashCompare(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
 
             case 'encrypt':
-            await encrypt(currentDir, args, options);
-            console.log(`You are currently in ${currentDir}`);
-            break;
+                await encrypt(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
 
             case 'decrypt':
-            await decrypt(currentDir, args, options);
-            console.log(`You are currently in ${currentDir}`);
-            break;
+                await decrypt(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
+
+            case 'log-stats':
+                await logStats(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
+
             default:
                 console.log('The following command doesnt exist, please try again\n');
             }
