@@ -1,0 +1,75 @@
+import { argParser } from './utils/argParser.js';
+import * as navigation from './navigation.js';
+import { csvToJson } from './commands/csvToJson.js';
+import { count } from './commands/count.js';
+import { hash } from './commands/hash.js';
+import { hashCompare } from './commands/hashCompare.js';
+import { encrypt } from './commands/encrypt.js';
+import { decrypt } from './commands/decrypt.js';
+
+export async function repl(currentDir, rl){
+    console.log(`You are currently in ${currentDir}\n`);
+    rl.prompt();
+    rl.on('line', async (line) => {
+        const {command, args, options} = argParser(line);
+        try{
+            switch (command){
+            case 'up':
+                currentDir = navigation.up(currentDir);
+                console.log(`You are currently in ${currentDir}`);
+                break
+            case 'cd':
+                currentDir = await navigation.cd(currentDir, args[0]);
+                console.log(`You are currently in ${currentDir}`);
+                break
+            case 'ls':
+                await navigation.ls(currentDir);
+                console.log(`You are currently in ${currentDir}`);
+                break
+
+            case 'csv-to-json':
+                await csvToJson(currentDir, args, options);
+                break;
+
+            case 'count':
+                await count(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}`);
+                break;
+
+            case 'hash':
+            await hash(currentDir, args, options);
+            console.log(`You are currently in ${currentDir}`);
+            break;
+
+            case 'hash-compare':
+            await hashCompare(currentDir, args, options);
+            console.log(`You are currently in ${currentDir}`);
+            break;
+
+            case 'encrypt':
+            await encrypt(currentDir, args, options);
+            console.log(`You are currently in ${currentDir}`);
+            break;
+
+            case 'decrypt':
+            await decrypt(currentDir, args, options);
+            console.log(`You are currently in ${currentDir}`);
+            break;
+            default:
+                console.log('The following command doesnt exist, please try again\n');
+            }
+        }
+        catch{
+            console.log('Operation failed');
+        }
+        
+        rl.prompt();
+    });
+    rl.on('SIGINT', () => {
+        rl.close();
+    });
+    rl.on('close', () => {
+        console.log('Thank you for using Data Processing CLI!');
+        rl.exit(0);
+    });
+}
