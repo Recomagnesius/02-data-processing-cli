@@ -1,0 +1,24 @@
+{
+  "name": "02-data-processing-cli",
+  "version": "1.0.0",
+  "description": "Data processing CLI",
+  "keywords": [
+    "node",
+    "cli"
+  ],
+  "homepage": "https://github.com/Recomagnesius/02-data-processing-cli#readme",
+  "bugs": {
+    "url": "https://github.com/Recomagnesius/02-data-processing-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Recomagnesius/02-data-processing-cli.git"
+  },
+  "license": "ISC",
+  "author": "Recomagnesius",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "start": "node src/main.js"
+  }
+}
