@@ -17,57 +17,62 @@ export async function repl(currentDir, rl){
             switch (command){
             case 'up':
                 currentDir = navigation.up(currentDir);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break
             case 'cd':
                 currentDir = await navigation.cd(currentDir, args[0]);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break
             case 'ls':
                 await navigation.ls(currentDir);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break
 
             case 'csv-to-json':
                 await csvToJson(currentDir, args, options);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'count':
                 await count(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'hash':
                 await hash(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'hash-compare':
                 await hashCompare(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'encrypt':
                 await encrypt(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'decrypt':
                 await decrypt(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
             case 'log-stats':
                 await logStats(currentDir, args, options);
-                console.log(`You are currently in ${currentDir}`);
+                console.log(`You are currently in ${currentDir}\n`);
                 break;
 
+            case 'exit':
+                rl.close();
+                return;
+
             default:
-                console.log('The following command doesnt exist, please try again\n');
+                console.log('Invalid input\n');
             }
         }
         catch{
-            console.log('Operation failed');
+            console.log('Operation failed\n');
         }
         
         rl.prompt();
@@ -76,7 +81,7 @@ export async function repl(currentDir, rl){
         rl.close();
     });
     rl.on('close', () => {
-        console.log('Thank you for using Data Processing CLI!');
-        rl.exit(0);
+        console.log('Thank you for using Data Processing CLI!\n');
+        process.exit(0);
     });
 }
